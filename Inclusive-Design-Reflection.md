@@ -31,14 +31,44 @@
 
 ## Reflection
 
-### Have you ever worked with or interacted with neurodivergent individuals in a professional or personal setting? What did you learn from that experience?
-- Yes, I have worked with neurodivergent individuals in various settings, and the key takeaway was the importance of patience, clear communication, and flexibility. Small adjustments can make a huge difference in ensuring inclusivity.
+### How can you adjust your communication style to be more inclusive of neurodivergent users and teammates?
+- Avoid using jargon or vague language. Instead, use simple, clear language that directly communicates expectations or tasks.
+- Allow extra time for clarification and feedback, and avoid rushing conversations.
+- Whenever possible, provide written summaries or instructions for tasks or communication to give individuals time to process information at their own pace.
+- Offer encouragement and acknowledge efforts to keep morale high.
 
-### What steps can you take to make your work or interactions more inclusive and supportive of neurodivergent individuals?
-- Avoid ambiguity and ensure that instructions and expectations are clear.
-- Be mindful of design choices that may cause discomfort and consider offering customization options.
-- Be patient and flexible with working styles, and offer support when needed to help team members succeed.
+### What are some common UX or communication pitfalls that might make Focus Bear less accessible or supportive?
+- Too much information or complex interfaces can be overwhelming for neurodivergent users, especially those with ADHD or Autism.
+- A lack of predictability or inconsistent design can lead to confusion and frustration.
+- Not offering ways for users to adjust settings (like text size, contrast, or notification types) can make the platform less user-friendly.
+- If instructions are not clear or feedback is not given in a constructive manner, users may struggle to understand what is required or how to improve.
 
-### How can you contribute to creating an inclusive, supportive, and ethical work environment for neurodivergent individuals?
-- Create a safe environment where neurodivergent individuals feel comfortable expressing their needs.
-- Support diverse working styles and foster an inclusive atmosphere by offering various ways to collaborate and succeed.
+### What is one practical change you can make in your work to better support vulnerable populations?
+- **Simplify and Structure Content**: I can work on designing interfaces or content that reduces cognitive load by using clear headings, step-by-step instructions, and limiting distractions. Also, providing options to customize the interface (e.g., font size, color contrast) will cater to a wider range of needs.
+
+## Task
+
+### Read a First-Person Account from Someone with ADHD or Autism About Their Experiences with Productivity Tools.
+
+
+### Identify One Design or Communication Improvement That Could Make Focus Bear More Accessible.
+- **Improvement**: Adding a **task breakdown feature** that allows users to break down larger tasks into smaller, more manageable steps with the ability to customize visual cues (e.g., color-coding for priority levels). This would help neurodivergent users with executive functioning challenges better manage tasks.
+
+### Practice Writing a Clear, Patient, and Supportive Response to a Hypothetical User Struggling with Executive Functioning.
+- **Hypothetical Response**:
+  > Hi user,
+  > 
+  > I know it can be difficult to keep track of everything when you're feeling overwhelmed, but     you’re not alone in this! Let’s take things one step at a time. First, let’s focus on the most important task, and break it into smaller parts. You can even use visual cues like checkboxes or color-coding to make it easier to see your progress. If it feels like too much at once, don’t hesitate to pause and take a short break to clear your mind.
+  > 
+  > Also, it might help to set a timer for short bursts of focused work—maybe 15-20 minutes at a time. Afterward, reward yourself with a quick break. You’ve got this, and I’m here to support you in any way that I can!
+  > 
+  > Please let me know if there’s anything I can do to make it easier for you to stay on track.
+  > .
+  > 
+  > Remember, it's okay to take breaks when you need them. You’ve got this!
+  > 
+  > Best,  
+  > Arief Saipul
+
+
+
