@@ -19,3 +19,71 @@ Consistency is crucial in a collaborative environment. Following established cod
 ## Efficiency – Write Performant, Optimized Code Without Premature Over-Engineering
 
 Efficiency means writing code that is performant but also balanced. While it's important to optimize for performance, it's crucial not to prematurely over-engineer the solution. Focus on clear, simple code first, and only optimize when necessary (for instance, when profiling indicates performance issues).
+
+## Messy Code Example
+
+import { Injectable } from '@nestjs/common';
+
+@Injectable()
+export class UserService {
+private users = [
+{ id: 1, email: 'user1@example.com' },
+{ id: 2, email: 'user2@example.com' },
+{ id: 3, email: 'user1@example.com' },
+{ id: 4, email: 'user4@example.com' },
+];
+
+findDuplicateEmails() {
+const duplicateEmails = [];
+for (let i = 0; i < this.users.length; i++) {
+for (let j = i + 1; j < this.users.length; j++) {
+if (this.users[i].email === this.users[j].email) {
+duplicateEmails.push(this.users[i].email);
+}
+}
+}
+return duplicateEmails;
+}
+}
+This is Messy because:
+
+- Nested loops are used to compare each user’s email with every other email, making it inefficient.
+- Adding duplicates to the array inside the loop could result in the same email being added multiple times if more than two users share the same email.
+- Code readability is lower due to nested logic, and it’s harder to maintain.
+
+## Clean Code Example
+
+import { Injectable } from '@nestjs/common';
+
+@Injectable()
+export class UserService {
+private users = [
+{ id: 1, email: 'user1@example.com' },
+{ id: 2, email: 'user2@example.com' },
+{ id: 3, email: 'user1@example.com' },
+{ id: 4, email: 'user4@example.com' },
+];
+
+findDuplicateEmails() {
+const seenEmails = new Set();
+const duplicateEmails = new Set();
+
+    this.users.forEach((user) => {
+      if (seenEmails.has(user.email)) {
+        duplicateEmails.add(user.email);
+      } else {
+        seenEmails.add(user.email);
+      }
+    });
+
+    return Array.from(duplicateEmails);
+
+}
+}
+
+This is Clean because:
+
+- No nested loops: We use a single loop to iterate through the users and check for duplicates efficiently.
+- Sets are used to track seen emails and duplicates, ensuring each email is only added once.
+- Improved readability: The logic is clear and easy to follow, and the variable names are meaningful.
+- Performance: Checking membership in a set is O(1), making it more efficient than using an array.
