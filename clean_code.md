@@ -87,3 +87,5 @@ This is Clean because:
 - Sets are used to track seen emails and duplicates, ensuring each email is only added once.
 - Improved readability: The logic is clear and easy to follow, and the variable names are meaningful.
 - Performance: Checking membership in a set is O(1), making it more efficient than using an array.
+
+Arief Saipul
