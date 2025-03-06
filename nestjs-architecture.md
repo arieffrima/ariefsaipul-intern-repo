@@ -19,3 +19,8 @@
 - **Modules**: Group related components, isolating different domains of functionality.
 - **Controllers**: Handle routing and request-response cycle, delegating business logic to providers.
 - **Providers**: Handle business logic and data manipulation, separate from HTTP request handling.
+
+
+## Create a simple module with a controller and a service
+
+https://github.com/arieffrima/my-nestjs-project.git
