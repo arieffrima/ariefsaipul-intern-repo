@@ -18,6 +18,6 @@ To expose API logs and debug a running container, I can use the `docker logs` co
 
 ```bash
 docker logs <nestjs_container_id>
+```
 
-
-Here's the sample https://github.com/arieffrima/my-nestjs-project
+## Here's the sample https://github.com/arieffrima/my-nestjs-project
