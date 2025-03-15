@@ -19,86 +19,92 @@ Refactoring the `processOrder` function into smaller, focused functions improved
 - **Improved maintainability**: Smaller functions are easier to modify or extend in the future, without breaking the logic of other tasks.
 - **Easier testing**: Each smaller function is easier to unit test, ensuring that the logic is correct in isolation.
 
-## Long and Complex code:
+## Long and Complex Code:
 
+```javascript
 function processOrder(order) {
-if (!order.isValid) {
-throw new Error("Invalid order");
+  if (!order.isValid) {
+    throw new Error("Invalid order");
+  }
+
+  const discount = order.amount > 100 ? 0.1 : 0.05;
+  const finalAmount = order.amount - order.amount * discount;
+
+  let shippingCost = 0;
+  if (order.isExpress) {
+    shippingCost = 20;
+  } else if (order.isOverseas) {
+    shippingCost = 50;
+  } else {
+    shippingCost = 10;
+  }
+
+  const totalAmount = finalAmount + shippingCost;
+
+  if (order.paymentMethod === "credit") {
+    // apply additional processing for credit payment
+    console.log("Processing credit payment...");
+  } else {
+    // apply different processing for other payment methods
+    console.log("Processing non-credit payment...");
+  }
+
+  return {
+    finalAmount: totalAmount,
+    discount: discount,
+    shippingCost: shippingCost,
+  };
 }
-
-    const discount = order.amount > 100 ? 0.1 : 0.05;
-    const finalAmount = order.amount - order.amount * discount;
-
-    let shippingCost = 0;
-    if (order.isExpress) {
-        shippingCost = 20;
-    } else if (order.isOverseas) {
-        shippingCost = 50;
-    } else {
-        shippingCost = 10;
-    }
-
-    const totalAmount = finalAmount + shippingCost;
-
-    if (order.paymentMethod === "credit") {
-        // apply additional processing for credit payment
-        console.log("Processing credit payment...");
-    } else {
-        // apply different processing for other payment methods
-        console.log("Processing non-credit payment...");
-    }
-
-    return {
-        finalAmount: totalAmount,
-        discount: discount,
-        shippingCost: shippingCost
-    };
-
-}
+```
 
 ## Refactor multiple smaller functions with clear responsibilities:
 
+```javascript
 function validateOrder(order) {
-if (!order.isValid) {
-throw new Error("Invalid order");
-}
+  if (!order.isValid) {
+    throw new Error("Invalid order");
+  }
 }
 
 function calculateDiscount(order) {
-return order.amount > 100 ? 0.1 : 0.05;
+  return order.amount > 100 ? 0.1 : 0.05;
+}
+
+function calculateFinalAmount(order, discount) {
+  return order.amount - order.amount * discount;
 }
 
 function calculateShippingCost(order) {
-if (order.isExpress) {
-return 20;
-} else if (order.isOverseas) {
-return 50;
-} else {
-return 10;
-}
+  if (order.isExpress) {
+    return 20;
+  } else if (order.isOverseas) {
+    return 50;
+  } else {
+    return 10;
+  }
 }
 
 function processPayment(order) {
-if (order.paymentMethod === "credit") {
-console.log("Processing credit payment...");
-} else {
-console.log("Processing non-credit payment...");
-}
+  if (order.paymentMethod === "credit") {
+    console.log("Processing credit payment...");
+  } else {
+    console.log("Processing non-credit payment...");
+  }
 }
 
 function processOrder(order) {
-validateOrder(order);
-const discount = calculateDiscount(order);
-const shippingCost = calculateShippingCost(order);
-processPayment(order);
+  validateOrder(order);
+  const discount = calculateDiscount(order);
+  const finalAmount = calculateFinalAmount(order, discount);
+  const shippingCost = calculateShippingCost(order);
+  processPayment(order);
 
-    const finalAmount = order.amount - order.amount * discount;
-    const totalAmount = finalAmount + shippingCost;
+  const totalAmount = finalAmount + shippingCost;
 
-    return {
-        finalAmount: totalAmount,
-        discount: discount,
-        shippingCost: shippingCost
-    };
-
+  return {
+    finalAmount: totalAmount,
+    discount: discount,
+    shippingCost: shippingCost,
+  };
 }
+```

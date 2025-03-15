@@ -22,30 +22,33 @@ Efficiency means writing code that is performant but also balanced. While it's i
 
 ## Messy Code Example
 
-import { Injectable } from '@nestjs/common';
+```typescript
+import { Injectable } from "@nestjs/common";
 
 @Injectable()
 export class UserService {
-private users = [
-{ id: 1, email: 'user1@example.com' },
-{ id: 2, email: 'user2@example.com' },
-{ id: 3, email: 'user1@example.com' },
-{ id: 4, email: 'user4@example.com' },
-];
+  private users = [
+    { id: 1, email: "user1@example.com" },
+    { id: 2, email: "user2@example.com" },
+    { id: 3, email: "user1@example.com" },
+    { id: 4, email: "user4@example.com" },
+  ];
 
-findDuplicateEmails() {
-const duplicateEmails = [];
-for (let i = 0; i < this.users.length; i++) {
-for (let j = i + 1; j < this.users.length; j++) {
-if (this.users[i].email === this.users[j].email) {
-duplicateEmails.push(this.users[i].email);
+  findDuplicateEmails() {
+    const duplicateEmails = [];
+    for (let i = 0; i < this.users.length; i++) {
+      for (let j = i + 1; j < this.users.length; j++) {
+        if (this.users[i].email === this.users[j].email) {
+          duplicateEmails.push(this.users[i].email);
+        }
+      }
+    }
+    return duplicateEmails;
+  }
 }
-}
-}
-return duplicateEmails;
-}
-}
-This is Messy because:
+```
+
+### Why This is Messy:
 
 - Nested loops are used to compare each user’s email with every other email, making it inefficient.
 - Adding duplicates to the array inside the loop could result in the same email being added multiple times if more than two users share the same email.
@@ -53,20 +56,21 @@ This is Messy because:
 
 ## Clean Code Example
 
-import { Injectable } from '@nestjs/common';
+```typescript
+import { Injectable } from "@nestjs/common";
 
 @Injectable()
 export class UserService {
-private users = [
-{ id: 1, email: 'user1@example.com' },
-{ id: 2, email: 'user2@example.com' },
-{ id: 3, email: 'user1@example.com' },
-{ id: 4, email: 'user4@example.com' },
-];
+  private users = [
+    { id: 1, email: "user1@example.com" },
+    { id: 2, email: "user2@example.com" },
+    { id: 3, email: "user1@example.com" },
+    { id: 4, email: "user4@example.com" },
+  ];
 
-findDuplicateEmails() {
-const seenEmails = new Set();
-const duplicateEmails = new Set();
+  findDuplicateEmails() {
+    const seenEmails = new Set();
+    const duplicateEmails = new Set();
 
     this.users.forEach((user) => {
       if (seenEmails.has(user.email)) {
@@ -77,15 +81,15 @@ const duplicateEmails = new Set();
     });
 
     return Array.from(duplicateEmails);
-
+  }
 }
-}
+```
 
-This is Clean because:
+### Why This is Clean:
 
-- No nested loops: We use a single loop to iterate through the users and check for duplicates efficiently.
-- Sets are used to track seen emails and duplicates, ensuring each email is only added once.
-- Improved readability: The logic is clear and easy to follow, and the variable names are meaningful.
-- Performance: Checking membership in a set is O(1), making it more efficient than using an array.
+- **No nested loops**: Use a single loop to iterate through the users and check for duplicates efficiently.
+- **Sets are used** to track seen emails and duplicates, ensuring each email is only added once.
+- **Improved readability**: The logic is clear and easy to follow, and the variable names are meaningful.
+- **Performance**: Checking membership in a set is O(1), making it more efficient than using an array.
 
-Arief Saipul
+---

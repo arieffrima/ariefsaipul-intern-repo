@@ -4,9 +4,9 @@
 
 Duplicated code can cause several serious issues, including:
 
-1. Difficult Maintenance\*: If we need to change the logic or fix a bug in the duplicated code, we have to modify it a every place it appears. This increases the risk of errors and makes changes more difficult.
-2. Prone to Inconsistency: Duplication increases the possibility of inconsistency. For example, if we update one copy of the code and forget to update the others, it can lead to unintended behavior or bugs.
-3. Increased Code Size: Duplication also makes our code larger and harder to understand. More code means more places to check when debugging or refactoring.
+1. **Difficult Maintenance**: If we need to change the logic or fix a bug in the duplicated code, we have to modify it at every place it appears. This increases the risk of errors and makes changes more difficult.
+2. **Prone to Inconsistency**: Duplication increases the possibility of inconsistency. For example, if we update one copy of the code and forget to update the others, it can lead to unintended behavior or bugs.
+3. **Increased Code Size**: Duplication also makes our code larger and harder to understand. More code means more places to check when debugging or refactoring.
 
 ## How did refactoring improve maintainability?
 
@@ -16,20 +16,24 @@ Moreover, well-organized and duplication-free code will be easier to read and un
 
 ## Example Bad Code:
 
+```javascript
 function calculatePriceWithDiscount1(price, discount) {
-return price - (price \* discount);
+  return price - price * discount;
 }
 
 function calculatePriceWithDiscount2(price, discount) {
-return price - (price \* discount);
+  return price - price * discount;
 }
 
 function calculatePriceWithDiscount3(price, discount) {
-return price - (price \* discount);
+  return price - price * discount;
 }
+```
 
 ## Example Good Code:
 
+```javascript
 function calculatePriceWithDiscount(price, discount) {
 return price - (price \* discount);
 }
+```
