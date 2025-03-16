@@ -68,6 +68,11 @@ const EXPRESS_SHIPPING_COST = 20;
 const OVERSEAS_SHIPPING_COST = 50;
 const STANDARD_SHIPPING_COST = 10;
 
+const PAYMENT_METHODS = {
+  CREDIT: "credit",
+  NON_CREDIT: "non-credit",
+};
+
 function validateOrder(order) {
   if (!order.isValid) {
     throw new Error("Invalid order");
@@ -93,7 +98,7 @@ function calculateShippingCost(order) {
 }
 
 function processPayment(order) {
-  if (order.paymentMethod === "credit") {
+  if (order.paymentMethod === PAYMENT_METHODS.CREDIT) {
     console.log("Processing credit payment...");
   } else {
     console.log("Processing non-credit payment...");
