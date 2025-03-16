@@ -18,7 +18,7 @@ By following these principles, you can ensure that your comments are meaningful 
 
 ## example of poorly commented code:
 
-```
+```javascript
 function calculateTotal(price, tax) {
     // Calculate the tax
     const taxAmount = price * tax;
@@ -32,7 +32,7 @@ function calculateTotal(price, tax) {
 
 ## more useful:
 
-```
+```javascript
 function calculateTotal(price, tax, location) {
     // // Sales tax is only calculated for residents of Wyoming due to state-specific regulations
 
