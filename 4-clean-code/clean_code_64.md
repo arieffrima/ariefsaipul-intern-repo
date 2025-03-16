@@ -59,11 +59,11 @@ finalPrice = applyVoucherDiscount(finalPrice, hasVoucher);
 }
 
 function applyDiscount(price, discount) {
-return discount > 0 ? price - (price \* discount) : price;
+return discount > 0 ? price - price * discount : price;
 }
 
 function applyPremiumDiscount(price, isPremiumCustomer) {
-return isPremiumCustomer ? price - (price \* 0.1) : price;
+return isPremiumCustomer ? price - price * 0.1 : price;
 }
 
 function applyVoucherDiscount(price, hasVoucher) {
