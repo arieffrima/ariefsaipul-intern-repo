@@ -77,6 +77,8 @@ export class OrderService {
 ```typescript
 @Injectable()
 export class OrderService {
+ private readonly PREMIUM_DISCOUNT_RATE = 0.1;
+
   // Calculates the total price of all items in the order
   private calculateTotal(order: Order): number {
     return order.items.reduce(
@@ -92,7 +94,7 @@ export class OrderService {
 
   // Applies a premium discount if the customer is a premium member
   private applyPremiumDiscount(total: number, customer: Customer): number {
-    return customer.isPremium ? total - total * 0.1 : total;
+    return customer.isPremium ? total - total * this.PREMIUM_DISCOUNT_RATE : total;
   }
 
   // Main function to process the order and calculate the total
