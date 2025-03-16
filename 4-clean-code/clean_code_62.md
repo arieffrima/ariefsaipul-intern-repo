@@ -60,6 +60,14 @@ function processOrder(order) {
 ## Refactor multiple smaller functions with clear responsibilities:
 
 ```javascript
+const HIGH_AMOUNT_THRESHOLD = 100;
+const HIGH_DISCOUNT_RATE = 0.1;
+const LOW_DISCOUNT_RATE = 0.05;
+
+const EXPRESS_SHIPPING_COST = 20;
+const OVERSEAS_SHIPPING_COST = 50;
+const STANDARD_SHIPPING_COST = 10;
+
 function validateOrder(order) {
   if (!order.isValid) {
     throw new Error("Invalid order");
@@ -67,7 +75,7 @@ function validateOrder(order) {
 }
 
 function calculateDiscount(order) {
-  return order.amount > 100 ? 0.1 : 0.05;
+  return order.amount > HIGH_AMOUNT_THRESHOLD ? HIGH_DISCOUNT_RATE : LOW_DISCOUNT_RATE;
 }
 
 function calculateFinalAmount(order, discount) {
@@ -76,11 +84,11 @@ function calculateFinalAmount(order, discount) {
 
 function calculateShippingCost(order) {
   if (order.isExpress) {
-    return 20;
+    return EXPRESS_SHIPPING_COST;
   } else if (order.isOverseas) {
-    return 50;
+    return OVERSEAS_SHIPPING_COST;
   } else {
-    return 10;
+    return STANDARD_SHIPPING_COST;
   }
 }
 
