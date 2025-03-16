@@ -19,6 +19,7 @@
   Overall, Focus Bear is good for me just needs a calendar feature in the future.
 
 #### 3. Screenshot showing that I have set up a password manager:
+  - What do you think about bitwarden? Let me know if you have any suggestions
 
   ![](https://github.com/arieffrima/ariefsaipul-intern-repo/blob/onboarding-feedback/images/feedback_10.png)
 
@@ -47,17 +48,18 @@
 
 #### 8. Doesn't seem like a great example. A more likely example is the same function in multiple files, which can then be abstracted to a module:
 
-[Check this](https://github.com/arieffrima/ariefsaipul-intern-repo/clean-code/clean_code_63.md)
+[Check this](https://github.com/arieffrima/ariefsaipul-intern-repo/blob/onboarding-feedback/4-clean-code/clean_code_63.md)
 
 #### 9. I don't think that comment is useful. It adds no more info than the code does. A better example would be explaining that sales tax is only calculated in Wyoming. Also, the code is not readable on GitHub due to Markdown issues:
 
-[Check this](https://github.com/arieffrima/ariefsaipul-intern-repo/clean-code/clean_code_65.md)
+[Check this](https://github.com/arieffrima/ariefsaipul-intern-repo/blob/onboarding-feedback/4-clean-code/clean_code_65.md)
 
-#### 10. When you refactored the long function into sub-functions, you left another code smell. The AuthService scares me—please read this article
+#### 10. When you refactored the long function into sub-functions, you left another code smell. The AuthService scares me:
 
-[Related code issue](https://github.com/arieffrima/ariefsaipul-intern-repo/clean-code/code_smells.md)
+[Related code issue](https://github.com/arieffrima/ariefsaipul-intern-repo/blob/onboarding-feedback/4-clean-code/code_smells.md)
 
 #### 11. Provide screenshots showing that you have tried a competitor app:
+  - I have been using Structured for about six months, and I find its calendar features and UI/UX to be excellent. However, unlike Focus Bear, it does not provide continuous guidance to help me stay on track.
 ![](https://github.com/arieffrima/ariefsaipul-intern-repo/blob/onboarding-feedback/images/feedback_6.png)
 
 #### 12. Good to see you tested it out. Why would Node 18 be slimmer than Node 20? Node 18 is EOL in April this year, so it's not a sensible approach
@@ -66,9 +68,10 @@
 [Pull Reaquest](https://github.com/arieffrima/my-nestjs-project/pull/2/files?diff=split&w=0)
 
 
-#### 13. Please show screenshots of you resolving the merge conflict
+#### 13. Please show screenshots of you resolving the merge conflict:
 
 ![](https://github.com/arieffrima/ariefsaipul-intern-repo/blob/onboarding-feedback/images/feedback_7.png)
+![](https://github.com/arieffrima/ariefsaipul-intern-repo/blob/onboarding-feedback/images/feedback_11.png)
 
 #### 14. Can you share a screenshot of your terminal setup?
 ![](https://github.com/arieffrima/ariefsaipul-intern-repo/blob/onboarding-feedback/images/feedback_9.png)
