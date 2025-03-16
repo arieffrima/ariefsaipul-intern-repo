@@ -174,6 +174,7 @@ export class AuthService {
     private jwtService: JwtService
   ) {}
 
+// Validate user credentials (in a real app, delegate to Firebase/Auth0)
   async validateUser(username: string, password: string): Promise<any> {
     const user = await this.userRepository.findOne({ where: { username } });
     if (user && (await bcrypt.compare(password, user.password))) {
@@ -182,8 +183,9 @@ export class AuthService {
     }
     return null;
   }
-
+// Login method (in a real app, delegate to Firebase/Auth0)
   async login(user: any) {
+// Normally, you'd call an external service (e.g., Firebase/Auth0) for authentication.
     const payload = { username: user.username, sub: user.userId };
     return {
       access_token: this.jwtService.sign(payload),
