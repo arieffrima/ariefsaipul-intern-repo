@@ -44,4 +44,6 @@ export class CreateUserDto {
   age: number;
 }
 ```
-## More Details  - https://github.com/arieffrima/my-nestjs-project
+![Screenshot 2025-03-17 161323](https://github.com/user-attachments/assets/fe471ffc-3d40-4dd8-a111-cb1a89abb1aa)
+
+#### More Details  - [https://github.com/arieffrima/my-nestjs-project](https://github.com/arieffrima/arief-nestjs)
