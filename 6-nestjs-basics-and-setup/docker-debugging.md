@@ -50,3 +50,6 @@ To restart the container:
   If using Docker Compose, you can specify service names as the hostname in the connection string, e.g., postgres:5432.
 
 - Ensure correct dependencies: Make sure the NestJS app has the correct database driver (e.g., pg for PostgreSQL) and is configured correctly in the NestJS service module.
+
+
+![Screenshot 2025-03-17 141750](https://github.com/user-attachments/assets/17fb098f-842d-473c-ac3d-0c77b1cd42a8)
