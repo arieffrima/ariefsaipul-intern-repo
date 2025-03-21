@@ -6,6 +6,7 @@
 **Solution:** Use named constants or enums.
 
 ### **Bad Example:**
+
 ```typescript
 @Injectable()
 export class UserService {
@@ -20,6 +21,7 @@ export class UserService {
 ```
 
 ### **Refactored Using Constants:**
+
 ```typescript
 const USER_TYPES = {
   ADMIN: "admin",
@@ -47,6 +49,7 @@ export class UserService {
 **Solution:** Break into smaller, more focused functions.
 
 ### **Bad Example:**
+
 ```typescript
 @Injectable()
 export class OrderService {
@@ -55,11 +58,11 @@ export class OrderService {
     order.items.forEach((item) => {
       total += item.price * item.quantity;
     });
-    
+
     if (order.discount) {
       total -= total * order.discount;
     }
-    
+
     if (order.customer.isPremium) {
       total -= total * 0.1;
     }
@@ -70,28 +73,58 @@ export class OrderService {
 ```
 
 ### **Refactored - Split into Smaller Functions:**
+
 ```typescript
 @Injectable()
 export class OrderService {
-  private calculateTotal(order: any): number {
-    return order.items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+ private readonly PREMIUM_DISCOUNT_RATE = 0.1;
+
+  // Calculates the total price of all items in the order
+  private calculateTotal(order: Order): number {
+    return order.items.reduce(
+      (sum, item) => sum + item.price * item.quantity,
+      0
+    );
   }
 
-  private applyDiscount(total: number, discount: number): number {
-    return discount ? total - total * discount : total;
+  // Applies a general discount to the total price
+  private applyDiscount(total: number, discount: Discount): number {
+    return discount ? total - total * discount.value : total;
   }
 
-  private applyPremiumDiscount(total: number, isPremium: boolean): number {
-    return isPremium ? total - total * 0.1 : total;
+  // Applies a premium discount if the customer is a premium member
+  private applyPremiumDiscount(total: number, customer: Customer): number {
+    return customer.isPremium ? total - total * this.PREMIUM_DISCOUNT_RATE : total;
   }
 
-  processOrder(order: any) {
+  // Main function to process the order and calculate the total
+  processOrder(order: Order) {
     let total = this.calculateTotal(order);
     total = this.applyDiscount(total, order.discount);
-    total = this.applyPremiumDiscount(total, order.customer.isPremium);
+    total = this.applyPremiumDiscount(total, order.customer);
 
     console.log(`Order Total: ${total}`);
   }
+}
+
+// Interfaces to define the structure of the order and related data
+interface Item {
+  price: number;
+  quantity: number;
+}
+
+interface Discount {
+  value: number;
+}
+
+interface Customer {
+  isPremium: boolean;
+}
+
+interface Order {
+  items: Item[];
+  discount: Discount;
+  customer: Customer;
 }
 ```
 
@@ -103,6 +136,7 @@ export class OrderService {
 **Solution:** Extract repeated logic into reusable functions.
 
 ### **Bad Example:**
+
 ```typescript
 @Injectable()
 export class AuthService {
@@ -123,21 +157,39 @@ export class AuthService {
 ```
 
 ### **Refactored - Single Function:**
+
 ```typescript
+import { Injectable } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
+import { User } from "./user.entity";
+import { JwtService } from "@nestjs/jwt";
+import * as bcrypt from "bcrypt";
+
 @Injectable()
 export class AuthService {
-  private validateUser(username: string, password: string): string | null {
-    const users = {
-      admin: "admin123",
-      user: "user123",
-    };
+  constructor(
+    @InjectRepository(User)
+    private userRepository: Repository<User>,
+    private jwtService: JwtService
+  ) {}
 
-    return users[username] === password ? username : null;
+// Validate user credentials (in a real app, delegate to Firebase/Auth0)
+  async validateUser(username: string, password: string): Promise<any> {
+    const user = await this.userRepository.findOne({ where: { username } });
+    if (user && (await bcrypt.compare(password, user.password))) {
+      const { password, ...result } = user; // Don't return the password
+      return result;
+    }
+    return null;
   }
-
-  login(user: any) {
-    const role = this.validateUser(user.username, user.password);
-    return role ? { status: "success", role } : { status: "failed" };
+// Login method (in a real app, delegate to Firebase/Auth0)
+  async login(user: any) {
+// Normally, you'd call an external service (e.g., Firebase/Auth0) for authentication.
+    const payload = { username: user.username, sub: user.userId };
+    return {
+      access_token: this.jwtService.sign(payload),
+    };
   }
 }
 ```
@@ -150,30 +202,44 @@ export class AuthService {
 **Solution:** Break into multiple smaller, focused classes.
 
 ### **Bad Example:**
+
 ```typescript
 @Injectable()
 export class OrderService {
-  processPayment(order: any) { /* payment logic */ }
-  generateInvoice(order: any) { /* invoice logic */ }
-  sendEmailNotification(order: any) { /* email logic */ }
+  processPayment(order: any) {
+    /* payment logic */
+  }
+  generateInvoice(order: any) {
+    /* invoice logic */
+  }
+  sendEmailNotification(order: any) {
+    /* email logic */
+  }
 }
 ```
 
 ### **Refactored - Separate Services:**
+
 ```typescript
 @Injectable()
 export class PaymentService {
-  processPayment(order: any) { /* payment logic */ }
+  processPayment(order: any) {
+    /* payment logic */
+  }
 }
 
 @Injectable()
 export class InvoiceService {
-  generateInvoice(order: any) { /* invoice logic */ }
+  generateInvoice(order: any) {
+    /* invoice logic */
+  }
 }
 
 @Injectable()
 export class NotificationService {
-  sendEmailNotification(order: any) { /* email logic */ }
+  sendEmailNotification(order: any) {
+    /* email logic */
+  }
 }
 ```
 
@@ -185,6 +251,7 @@ export class NotificationService {
 **Solution:** Use early returns, guard clauses, or refactor to design patterns.
 
 ### **Bad Example:**
+
 ```typescript
 @Injectable()
 export class AccessService {
@@ -204,11 +271,17 @@ export class AccessService {
 ```
 
 ### **Refactored - Use Early Returns & Guard Clauses:**
+
 ```typescript
 @Injectable()
 export class AccessService {
   checkAccess(user: any) {
-    if (!user || !user.isActive || !user.hasSubscription || !user.subscription.isValid()) {
+    if (
+      !user ||
+      !user.isActive ||
+      !user.hasSubscription ||
+      !user.subscription.isValid()
+    ) {
       return "Access Denied";
     }
     return "Access Granted";
@@ -221,16 +294,18 @@ export class AccessService {
 # Code Smells Reflection
 
 ## What Code Smells Did I Find?
+
 - Found several instances of magic numbers, deeply nested conditionals, and long functions.
 - Also noticed some duplicate code and inconsistent naming conventions.
 
 ## How Did Refactoring Help?
+
 - Breaking long functions into smaller ones improved readability.
 - Replacing magic numbers with constants made the code clearer.
 - Removing deeply nested conditionals reduced complexity.
 
 ## How Can Avoiding Code Smells Help with Debugging?
+
 - Clean code makes it easier to trace issues.
 - Consistent naming prevents confusion when reading code.
 - Reusable functions reduce the chances of introducing bugs.
-
